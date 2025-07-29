@@ -5,9 +5,7 @@ Projeto de desenvolvimento de uma aplicação que utiliza gamificação e inteli
 # Tecnologias Utilizadas
 - HTML
 - CSS
-- JAVASCRIPT(NODE.JS)
-- PYTHON(TENSOR FLOW)
-- FLUTTER
+- JAVASCRIPT
 
 # Autores
 Nome: Leonardo Rafael de Castro
