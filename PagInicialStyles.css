@@ -1,0 +1,179 @@
+body{
+    background-color: #00042e;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+.inicio{
+    font-family: 'roboto', sans-serif;
+    font-size: 80px;
+    margin-top: 200px;
+    color: #f5f5f5;
+}
+
+.introducao{
+    background-color: #000044;
+    color: #ffffff;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 30px;
+    text-align: justify;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding: 10px;
+}
+
+.conta{
+    font-family: arial;
+    color: white;
+    background-color: black;
+    height: 70px;
+    width: 190px;
+    font-size: 25px;
+    margin-left: 470px;
+    border-radius: 25px;
+    border: #0000ab;
+}
+
+.conta:hover{
+    background-color: #0000ab;
+    transition: background-color 0.3s ease;
+}
+
+.conta2{
+    font-family: arial;
+    color: white;
+    background-color: black;
+    height: 70px;
+    width: 190px;
+    font-size: 25px;
+    margin-left: 130px;
+    border-radius: 25px;
+    border: #0000ab;
+}
+
+.conta2:hover{
+    background-color: #0000ab;
+    transition: background-color 0.3s ease;
+}
+
+.descricao{
+    font-family: 'roboto', sans-serif;
+    color: whitesmoke;
+    margin-left: 200px;
+    margin-top: 17px;
+    font-size: 20px;
+}
+
+.subtitulos{
+    font-family: 'roboto', sans-serif;
+    color: whitesmoke;
+    margin-left: 180px;
+    margin-top: 17px;
+    font-size: 26px;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 20px
+}
+
+#conteudo{
+    margin-left: 70px;
+    color: white;
+    font-size: 50px;
+    font-family: 'roboto', sans-serif;
+}
+
+.box {
+    background-color: #000044;
+    color: white;
+    padding: 20px;
+    border-radius: 15px;
+    width: 25%;
+    height: 200px;
+    margin: 40px 0;
+    text-align: center;
+}
+
+#titleDiv{
+    font-family: 'roboto', sans-serif;
+    font-size: 35px;
+    text-align: left;
+}
+
+#textDiv{
+    font-family: 'roboto', sans-serif;
+    font-size: 20px;
+    font-weight: normal;
+    text-align: justify;
+}
+
+input::placeholder {
+    color: rgb(255, 255, 255);
+    opacity: 1;
+  }
+  
+  /* Para navegadores WebKit (Chrome, Safari) */
+  input::-webkit-input-placeholder {
+    color: rgb(255, 255, 255);
+  }
+  
+  /* Para navegadores Mozilla Firefox */
+  input::-moz-placeholder {
+    color: rgb(255, 255, 255);
+  }
+  
+  /* Para navegadores Microsoft Edge e Internet Explorer */
+  input:-ms-input-placeholder {
+    color: rgb(255, 255, 255);
+  }
+  
+.suporte{
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 17px;
+    border: 1px solid #000044;
+    border-radius: 25px;
+    width: 180px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    background-color: #000000;
+}
+
+.suporte:hover{
+    background-color: #000b52;
+    transition: background-color 0.3s ease;
+}
+
+#logo{
+    margin-right: 15px;
+    margin-top: 15px;
+}
+
+.FAQ{
+    font-family: arial;
+    color: white;
+    background-color: black;
+    height: 70px;
+    width: 190px;
+    font-size: 25px;
+    margin-left: 140px;
+    border-radius: 25px;
+    border: #0000ab;
+}
+
+.FAQ:hover{
+    background-color: #0000ab;
+    transition: background-color 0.3s ease;
+}
