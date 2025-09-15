@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,13 +9,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@600&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="Logotemp.png">
 </head>
+
 <body>
 
     <div class="maindiv">
 
         <center>
-        <h3>Criar Conta</h3>
+            <h3>Criar Conta</h3>
         </center>
+
+        <h5>Insira seu nome de usuário</h5>
+        <input type="text" class="input" name="username" placeholder="nome de usuário">
 
         <h5>Insira seu email</h5>
         <input type="email" class="input" name="email" placeholder="email">
@@ -24,21 +29,40 @@
 
         <h5>Confirmar senha</h5>
         <input type="password" class="input" name="confirmarsenha" placeholder="Confirmar senha">
-        
+
+        <h5>Insira sua série escolar</h5>
+        <select name="serie" class="dropdown">
+            <option value="std">Selecione uma opção</option>
+            <option value="3ano">3º ano</option>
+            <option value="2ano">2º ano de cursinho</option>
+            <option value="tre">Treineiro</option>
+            <option value="emc">Ensino médio completo</option>
+        </select>
+
+        <h5>Insira os vestibulares que<br> você possui interesse</h5>
+        <select name="serie" class="dropdown">
+            <option value="std">Selecione uma opção</option>
+            <option value="fuv">Fuvest</option>
+            <option value="uni">Unicamp</option>
+            <option value="ene">Enem</option>
+            <option value="out">Outras</option>
+        </select>
+
         <br>
         <br>
 
         <div class="privacidade">
 
             <input type="checkbox" value="">
-        
+
             <h6>Aceito os <a href="Termos.html">termos de privacidade</a> oferecidos</h6>
 
         </div>
 
-        <button class="finalizar" onclick="location.href='Home.html'">Criar conta</button>
+        <button class="finalizar" onclick="location.href='./Home.html'">Criar conta</button>
 
     </div>
 
 </body>
+
 </html>
