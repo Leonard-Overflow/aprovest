@@ -4,6 +4,9 @@ Projeto de desenvolvimento de uma aplicação que utiliza gamificação para aju
 # Tecnologias Utilizadas
 - HTML
 - CSS
+- JAVASCRIPT
+- MYSQL
+- PHP
 
 # Autores
 Nome: Leonardo Rafael de Castro
