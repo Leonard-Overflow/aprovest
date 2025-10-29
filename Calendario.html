@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CalendarioStyles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@600&display=swap" rel="stylesheet">
+    <title>Calendário Interativo</title>
+</head>
+<body>
+
+    <nav class="navbar">
+        <img src="" alt="logo">
+        <button class="opcao" onclick="location.href='../Home.html'">Home</button>
+        <button class="opcao" onclick="location.href='/Home/Cursos.html'">Cursos</button>
+        <button class="opcao" onclick="location.href='/Home/Calendario.html'">Calendario</button>
+        <button class="opcao" onclick="location.href='/Home/Simulados.html'">Simulados</button>
+        <button class="opcao" onclick="location.href='/Home/Biblioteca.html'">Biblioteca</button>
+        <button class="opcao" onclick="location.href='/Home/Medalhas.html'">Medalhas</button>
+        <div class="direita">
+            <button class="perfil" onclick="location.href='Perfil.html'"><img src="Perfil.png" alt="Perfil"></button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header>
+            <h1 class="titulo">Calendário Interativo</h1>
+            <p class="subtitulo">Visualize o ano inteiro e marque eventos em dias específicos</p>
+            
+            <div class="year-selector">
+                <button id="prev-year">&lt; Ano Anterior</button>
+                <div class="year-display" id="current-year">2024</div>
+                <button id="next-year">Próximo Ano &gt;</button>
+            </div>
+        </header>
+        
+        <main>
+            <div class="calendar-container" id="calendar">
+                
+            </div>
+            
+            <div class="event-form">
+                <h2>Adicionar Evento</h2>
+                <form id="add-event-form">
+                    <div class="form-group">
+                        <label for="event-date">Data do Evento:</label>
+                        <input type="date" id="event-date" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="event-title">Título do Evento:</label>
+                        <input type="text" id="event-title" placeholder="Digite o título do evento" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="event-description">Descrição (opcional):</label>
+                        <textarea id="event-description" placeholder="Digite uma descrição para o evento"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="button">Adicionar Evento</button>
+                </form>
+            </div>
+            
+            <div class="events-list">
+                <h2>Meus Eventos</h2>
+                <div id="events-container">
+                    <!-- Os eventos serão listados aqui -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Configurações iniciais
+        let currentYear = new Date().getFullYear();
+        let events = JSON.parse(localStorage.getItem('calendarEvents')) || {};
+        
+        // Elementos DOM
+        const calendarContainer = document.getElementById('calendar');
+        const currentYearElement = document.getElementById('current-year');
+        const prevYearButton = document.getElementById('prev-year');
+        const nextYearButton = document.getElementById('next-year');
+        const eventForm = document.getElementById('add-event-form');
+        const eventsContainer = document.getElementById('events-container');
+        
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', function() {
+            updateYearDisplay();
+            renderCalendar();
+            renderEventsList();
+            
+            // Event listeners
+            prevYearButton.addEventListener('click', goToPreviousYear);
+            nextYearButton.addEventListener('click', goToNextYear);
+            eventForm.addEventListener('submit', addEvent);
+            
+            // Preencher a data atual no formulário
+            const today = new Date();
+            const formattedDate = today.toISOString().split('T')[0];
+            document.getElementById('event-date').value = formattedDate;
+        });
+        
+        // Funções do calendário
+        function updateYearDisplay() {
+            currentYearElement.textContent = currentYear;
+        }
+        
+        function goToPreviousYear() {
+            currentYear--;
+            updateYearDisplay();
+            renderCalendar();
+        }
+        
+        function goToNextYear() {
+            currentYear++;
+            updateYearDisplay();
+            renderCalendar();
+        }
+        
+        function renderCalendar() {
+            calendarContainer.innerHTML = '';
+            
+            for (let month = 0; month < 12; month++) {
+                const monthElement = document.createElement('div');
+                monthElement.className = 'month';
+                
+                const monthHeader = document.createElement('div');
+                monthHeader.className = 'month-header';
+                monthHeader.textContent = getMonthName(month) + ' ' + currentYear;
+                
+                const weekdays = document.createElement('div');
+                weekdays.className = 'weekdays';
+                
+                // Adicionar dias da semana
+                const weekdaysNames = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+                weekdaysNames.forEach(day => {
+                    const dayElement = document.createElement('div');
+                    dayElement.textContent = day;
+                    weekdays.appendChild(dayElement);
+                });
+                
+                const daysContainer = document.createElement('div');
+                daysContainer.className = 'days';
+                
+                // Calcular o primeiro dia do mês e quantos dias tem o mês
+                const firstDay = new Date(currentYear, month, 1).getDay();
+                const daysInMonth = new Date(currentYear, month + 1, 0).getDate();
+                
+                // Adicionar células vazias para os dias antes do primeiro dia do mês
+                for (let i = 0; i < firstDay; i++) {
+                    const emptyDay = document.createElement('div');
+                    emptyDay.className = 'day empty';
+                    daysContainer.appendChild(emptyDay);
+                }
+                
+                // Adicionar os dias do mês
+                const today = new Date();
+                const isCurrentYear = currentYear === today.getFullYear();
+                const isCurrentMonth = month === today.getMonth();
+                
+                for (let day = 1; day <= daysInMonth; day++) {
+                    const dayElement = document.createElement('div');
+                    dayElement.className = 'day';
+                    dayElement.textContent = day;
+                    dayElement.dataset.date = `${currentYear}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                    
+                    // Verificar se é hoje
+                    if (isCurrentYear && isCurrentMonth && day === today.getDate()) {
+                        dayElement.classList.add('today');
+                    }
+                    
+                    // Verificar se tem evento
+                    const dateKey = `${currentYear}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                    if (events[dateKey]) {
+                        dayElement.classList.add('event');
+                    }
+                    
+                    // Adicionar evento de clique
+                    dayElement.addEventListener('click', function() {
+                        selectDate(this.dataset.date);
+                    });
+                    
+                    daysContainer.appendChild(dayElement);
+                }
+                
+                monthElement.appendChild(monthHeader);
+                monthElement.appendChild(weekdays);
+                monthElement.appendChild(daysContainer);
+                calendarContainer.appendChild(monthElement);
+            }
+        }
+        
+        function getMonthName(monthIndex) {
+            const months = [
+                'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+                'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+            ];
+            return months[monthIndex];
+        }
+        
+        function selectDate(date) {
+            document.getElementById('event-date').value = date;
+            document.getElementById('event-title').focus();
+        }
+        
+        // Funções de eventos
+        function addEvent(e) {
+            e.preventDefault();
+            
+            const date = document.getElementById('event-date').value;
+            const title = document.getElementById('event-title').value.trim();
+            const description = document.getElementById('event-description').value.trim();
+            
+            if (!title) {
+                alert('Por favor, insira um título para o evento.');
+                return;
+            }
+            
+            // Adicionar evento
+            if (!events[date]) {
+                events[date] = [];
+            }
+            
+            events[date].push({
+                title: title,
+                description: description,
+                id: Date.now() // ID simples baseado no timestamp
+            });
+            
+            // Salvar no localStorage
+            localStorage.setItem('calendarEvents', JSON.stringify(events));
+            
+            // Atualizar a interface
+            renderCalendar();
+            renderEventsList();
+            
+            // Limpar o formulário
+            document.getElementById('event-title').value = '';
+            document.getElementById('event-description').value = '';
+            
+            alert('Evento adicionado com sucesso!');
+        }
+        
+        function renderEventsList() {
+            eventsContainer.innerHTML = '';
+            
+            // Ordenar datas
+            const sortedDates = Object.keys(events).sort();
+            
+            if (sortedDates.length === 0) {
+                eventsContainer.innerHTML = '<p>Nenhum evento cadastrado.</p>';
+                return;
+            }
+            
+            sortedDates.forEach(date => {
+                events[date].forEach(event => {
+                    const eventElement = document.createElement('div');
+                    eventElement.className = 'event-item';
+                    
+                    const dateElement = document.createElement('div');
+                    dateElement.className = 'event-date';
+                    dateElement.textContent = formatDateForDisplay(date);
+                    
+                    const titleElement = document.createElement('div');
+                    titleElement.className = 'event-title';
+                    titleElement.textContent = event.title;
+                    
+                    const deleteButton = document.createElement('button');
+                    deleteButton.className = 'delete-event';
+                    deleteButton.textContent = 'Excluir';
+                    deleteButton.addEventListener('click', function() {
+                        deleteEvent(date, event.id);
+                    });
+                    
+                    eventElement.appendChild(dateElement);
+                    eventElement.appendChild(titleElement);
+                    eventElement.appendChild(deleteButton);
+                    
+                    eventsContainer.appendChild(eventElement);
+                });
+            });
+        }
+        
+        function formatDateForDisplay(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('pt-BR');
+        }
+        
+        function deleteEvent(date, eventId) {
+            if (confirm('Tem certeza que deseja excluir este evento?')) {
+                events[date] = events[date].filter(event => event.id !== eventId);
+                
+                // Remover a data se não houver mais eventos
+                if (events[date].length === 0) {
+                    delete events[date];
+                }
+                
+                // Salvar no localStorage
+                localStorage.setItem('calendarEvents', JSON.stringify(events));
+                
+                // Atualizar a interface
+                renderCalendar();
+                renderEventsList();
+            }
+        }
+    </script>
+</body>
+</html>

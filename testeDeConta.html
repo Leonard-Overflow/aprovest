@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Usuário</title>
+</head>
+<body>
+    <h1>Criar Conta</h1>
+    
+    <form id="cadastroForm">
+        <div>
+            <label for="username">Nome de usuário:</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+        
+        <div>
+            <label for="password">Senha:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        
+        <div>
+            <label for="confirmPassword">Confirmar senha:</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" required>
+        </div>
+        
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        
+        <div>
+            <label for="phone">Telefone:</label>
+            <input type="tel" id="phone" name="phone" required>
+        </div>
+        
+        <div>
+            <label for="ano">Ano:</label>
+            <select id="ano" name="ano" required>
+                <option value="">Selecione o ano</option>
+                <option value="1ano">1º ano</option>
+                <option value="2ano">2º ano</option>
+                <option value="3ano">3º ano</option>
+            </select>
+        </div>
+        
+        <div>
+            <label for="vestibular">Vestibular:</label>
+            <select id="vestibular" name="vestibular" required>
+                <option value="">Selecione o vestibular</option>
+                <option value="fuvest">Fuvest</option>
+                <option value="unicamp">Unicamp</option>
+                <option value="enem">Enem</option>
+                <option value="vunesp">Vunesp</option>
+                <option value="outros">Outros</option>
+            </select>
+        </div>
+        
+        <div>
+            <label>
+                <input type="checkbox" id="termos" name="termos" required>
+                Eu aceito os <a href="termos-privacidade.html" target="_blank">termos de privacidade</a>
+            </label>
+        </div>
+        
+        <button type="submit">Criar Conta</button>
+    </form>
+
+    <script>
+        document.getElementById('cadastroForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const termos = document.getElementById('termos').checked;
+            
+            if (password !== confirmPassword) {
+                alert('As senhas não coincidem!');
+                return;
+            }
+            
+            if (!termos) {
+                alert('Você deve aceitar os termos de privacidade!');
+                return;
+            }
+            
+            alert('Conta criada com sucesso!');
+            // Aqui você pode adicionar o código para enviar os dados para o servidor
+        });
+    </script>
+</body>
+</html>

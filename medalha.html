@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medalha</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+
+         .medal-icon {
+        width: 60px; /* Adjust the size of your medal */
+        height: auto;
+        margin-bottom: 15px;
+        align-self: flex-start; /* This aligns the medal to the left */
+    }
+
+        .container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .title {
+            color: white;
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .subtitle {
+            color: #ecf0f1;
+            font-size: 1.3rem;
+        }
+        
+        /* Button Grid Container */
+        .button-grid {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 20px;
+            width: 100%;
+            height: calc(100vh - 200px);
+        }
+        
+        /* Grid Button Styles */
+        .grid-button {
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 12px;
+            color: #2c3e50;
+            font-size: 1.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .grid-button:hover {
+            background: rgba(255, 255, 255, 0.95);
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+        }
+        
+        .grid-button h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 8px;
+        }
+        
+        .grid-button p {
+            color: #555;
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background: rgba(44, 62, 80, 0.9);
+            color: #ecf0f1;
+            margin-top: auto;
+        }
+        
+        @media (max-width: 768px) {
+            .button-grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: repeat(4, 1fr);
+                height: calc(100vh - 150px);
+            }
+            
+            .title {
+                font-size: 2.2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .grid-button {
+                padding: 20px;
+            }
+        }
+        
+         .links-container {
+            display: flex;
+            justify-content: space-between;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: 0px;
+            margin-bottom: 50px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .link {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.2rem;
+            padding: 12px 25px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.15);
+            text-align: center;
+            flex: 1;
+            margin: 0 10px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .link:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .title {
+                font-size: 1.8rem;
+            }
+            
+            .grid-button h2 {
+                font-size: 1.4rem;
+            }
+            
+            .grid-button p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="links-container">
+              <button href="#" class="link">link de exemplo</button>
+            <button href="#" class="link">link de exemplo</button>
+            <button href="#" class="link">link de exemplo</button>
+            <button href="#" class="link">link de exemplo</button>
+            <button href="#" class="link">link de exemplo</button>
+        </div>
+
+    <div class="container">
+        
+        
+        
+        <div class="button-grid">
+            <button class="grid-button">
+                 <img src="caminho/para/medalha.jpeg" alt="Medalha 1" class="medal-icon">
+                <p>Conteúdo informativo do primeiro botão na grade 2x2.</p>
+            </button>
+            
+            <button class="grid-button">
+                 <img src="caminho/para/medalha.jpeg" alt="Medalha 1" class="medal-icon">
+                <p>Segundo elemento da malha quadrada com conteúdo textual.</p>
+            </button>
+            
+            <button class="grid-button">
+                 <img src="caminho/para/medalha.jpeg" alt="Medalha 1" class="medal-icon">
+                <p>Terceiro botão da disposição em grade cobrindo a tela.</p>
+            </button>
+            
+            <button class="grid-button">
+                <img src="caminho/para/medalha.jpeg" alt="Medalha 1" class="medal-icon">
+                <p>Quarto e último botão completando o layout 2x2.</p>
+            </button>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>Todos os direitos reservados.</p>
+    </div>
+</body>
+</html>
